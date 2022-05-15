@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import Topbar from "./components/topbar/Topbar";
+import Homepage from "./pages/homepage/Homepage";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import Settings from "./pages/settings/Settings";
+import Single from "./pages/single/Single";
+import Contact from "./pages/contact/Contact";
+import Write from "./pages/write/Write";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const currentUser = true;
+    return (
+        <Router>
+            <Topbar />
+
+            <Switch>
+                <Route exact path="/">
+                    <Homepage />
+                </Route>
+
+                <Route path="/posts">
+                    <Homepage />
+                </Route>
+
+                <Route path="/register">
+                    {false ? <Homepage /> : <Register />}
+                </Route>
+
+                <Route path="/login">
+                    {false ? <Homepage /> : <Login />}
+                </Route>
+
+                <Route path="/post/:id">
+                    <Single />
+                </Route>
+                <Route path='/contact'>
+                    <Contact />
+                </Route>
+
+                <Route path="/write">
+                    {currentUser ? <Write /> : <Login />}
+                </Route>
+
+                <Route path="/settings">
+                    {currentUser ? <Settings /> : <Login />}
+                </Route>
+
+            </Switch>
+        </Router>
+    );
 }
 
 export default App;
